@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">5П</string>
+    <string name="title_activity_project">ProjectActivity</string>
+    <string name="hello_world">Hello, world!</string>
+</resources>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorGrayWhite">#E6E6E6</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorAccent">#03DAC5</color>
+
+    <!-- Цвета для Active Bar -->
+    <color name="themeOrange">#FF3D00</color>
+    <color name="themeOrangeDark">#FF2D00</color>
+
+</resources>
