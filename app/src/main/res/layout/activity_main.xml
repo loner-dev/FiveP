@@ -8,23 +8,13 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <ListView
+    <!--<ListView
         android:id="@+id/mainLV"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"/>-->
 
-    </ListView>
-
-
-
-    <!--
-    <fragment
-        android:id="@+id/mainListFragment"
-        android:name="ru.five_p.project.MainListFragment"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout="@android:layout/simple_list_item_1">
-
-
-    </fragment>-->
+        android:layout_height="match_parent" />
 </LinearLayout>

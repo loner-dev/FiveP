@@ -3,47 +3,33 @@ package ru.five_p.project
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.ArrayAdapter
-import android.widget.ListView
+import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
+
+    private val myAdapter = FivePAdapter(ArrayList())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        init()
         Log.d("PPPPP", "setMainAct")
     }
 
     override fun onResume() {
         super.onResume()
 
-        // Контент в ListView
-        val arrayAdapter: ArrayAdapter<*>
-        val namesProject = arrayOf(
-            "1 проект", "2 проект", "3 проект", "4 проект", "5 проект")
-        val mainListView = findViewById<ListView>(R.id.mainLV)
-
-        arrayAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, namesProject)
-        mainListView.adapter = arrayAdapter
-
-
+        fillAdapter()
         Log.d("PPPPP","2 Test")
     }
+
+    private fun init() {
+        rcView.layoutManager = LinearLayoutManager(this)
+        rcView.adapter = myAdapter
+    }
+
+    private fun fillAdapter() {
+        myAdapter.updateAdapter(listOf("0 проект", "1 проект", "2 проект", "3 проект", "4 проект", "5 проект", "6 проект", "7 проект", "8 проект", "9 проект", "10 проект"))
+    }
 }
-// Фрагмент ListView
-/*class MainListFragment : ListFragment() {
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Добавление массива
-        // val names = arrayOf("first", "second", "third")
-        val names = arrayOf("123123")
-        val adapter : ArrayAdapter<String> = ArrayAdapter(inflater.context, android.R.layout.simple_list_item_1, names)
-        listAdapter = adapter
-
-
-        return super.onCreateView(inflater, container, savedInstanceState)
-    }*/
