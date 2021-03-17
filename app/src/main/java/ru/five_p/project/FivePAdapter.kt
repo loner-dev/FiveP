@@ -8,14 +8,13 @@ import androidx.recyclerview.widget.RecyclerView
 
 class FivePAdapter(list_project:ArrayList<String>) : RecyclerView.Adapter<FivePAdapter.FivePHolder>() {
 
-    var array_project = list_project
-
+    private var arrayProject = list_project
 
     class FivePHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        val text_view_title = itemView.findViewById<TextView>(R.id.textView)
+        private val textViewTitle: TextView = itemView.findViewById<TextView>(R.id.textView)
         fun setData(title:String){
-            text_view_title.text = title
+            textViewTitle.text = title
         }
     }
 
@@ -27,18 +26,18 @@ class FivePAdapter(list_project:ArrayList<String>) : RecyclerView.Adapter<FivePA
 
     // Подключение данных из массива к шаблону
     override fun onBindViewHolder(holder: FivePHolder, position: Int) {
-        holder.setData(array_project.get(position))
+        holder.setData(arrayProject[position])
     }
 
     // Кол-во элементов
     override fun getItemCount(): Int {
-        return array_project.size
+        return arrayProject.size
     }
 
     fun updateAdapter(listItems:List<String>) {
 
-        array_project.clear()
-        array_project.addAll(listItems)
+        arrayProject.clear()
+        arrayProject.addAll(listItems)
 
         notifyDataSetChanged()
     }
