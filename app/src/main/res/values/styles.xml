@@ -19,7 +19,7 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-    <style name="textProg">
+    <style name="textProgram">
         <item name="android:textColor">#0000ff</item>
         <item name="android:background">#651FFF</item>
         <item name="android:layout_width">match_parent</item>

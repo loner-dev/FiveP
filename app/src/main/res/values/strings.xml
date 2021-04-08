@@ -2,4 +2,9 @@
     <string name="app_name">5П</string>
     <string name="title_activity_project">ProjectActivity</string>
     <string name="hello_world">Hello, world!</string>
+    <string name="plus">Новый проект!</string>
+    <string name="enter_name">Название проекта…</string>
+    <string name="new_project_str">Мой новый проект</string>
+    <string name="project_number">#0</string>
+    <string name="status">status</string>
 </resources>
