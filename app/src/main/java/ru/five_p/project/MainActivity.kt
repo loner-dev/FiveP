@@ -1,16 +1,18 @@
 package ru.five_p.project
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), FivePAdapter.OnItemClickListener {
 
-    private val myAdapter = FivePAdapter(ArrayList(), ArrayList(), ArrayList())
+    private val myAdapter = FivePAdapter(ArrayList(), ArrayList(), ArrayList(), this)
     private var myProjectList = arrayListOf<String>()
     private var myNumberList = arrayListOf<Int>()
     private var myStatusList = arrayListOf<Boolean>()
@@ -48,7 +50,9 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
         R.id.action_bar_plus -> {
             createNewProject()
-            fillAdapter()
+            true
+        } R.id.action_bar_help -> {
+            Toast.makeText(this, "Кнопка помощи $item", Toast.LENGTH_SHORT).show()
             true
         } else -> super.onOptionsItemSelected(item)
     }
@@ -71,5 +75,13 @@ class MainActivity : AppCompatActivity() {
             fillAdapter()
         }
         setDialog.show(supportFragmentManager, "newProject")
+    }
+
+    override fun onItemClick(position: Int) {
+        Toast.makeText(this, "Клик по позиции $position", Toast.LENGTH_SHORT).show()
+        val intent = Intent(this, ProjectActivity::class.java)
+        intent.putExtra("positionOfProject", position)
+
+        startActivity(intent)
     }
 }

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/save"
+        android:icon="@drawable/vector_save"
+        android:title="@string/save_str"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/plus_task"
+        android:icon="@drawable/vector_add"
+        android:title="@string/plus"
+        app:showAsAction="always"/>
+    <item
+        android:id="@+id/save_name"
+        android:title="@string/save_name_str"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/save_purpose"
+        android:title="@string/save_purpose_str"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/delete_project"
+        android:title="@string/delete_project_str"
+        app:showAsAction="never"/>
+</menu>

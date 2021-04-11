@@ -7,4 +7,12 @@
     <string name="new_project_str">Мой новый проект</string>
     <string name="project_number">#0</string>
     <string name="status">status</string>
+    <string name="my_task">Мои задачи:</string>
+    <string name="name_project_str">Название проекта:</string>
+    <string name="purpose_project">Цель проекта:</string>
+    <string name="help_str">Помощь</string>
+    <string name="save_str">Сохранить</string>
+    <string name="save_name_str">Изменить имя проекта</string>
+    <string name="save_purpose_str">Изменить цель проекта</string>
+    <string name="delete_project_str">Удалить проект</string>
 </resources>

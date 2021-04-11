@@ -7,17 +7,20 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import kotlin.collections.ArrayList
 
 class FivePAdapter(list_project:ArrayList<String>,
                    list_number:ArrayList<Int>,
-                   list_status:ArrayList<Boolean>)
+                   list_status:ArrayList<Boolean>,
+                   private val listener: OnItemClickListener)
     : RecyclerView.Adapter<FivePAdapter.FivePHolder>() {
 
     private var arrayProject = list_project
     private var arrayNumber = list_number
     private var arrayStatus = list_status
 
-    class FivePHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class FivePHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
+        View.OnClickListener {
 
         private val textViewTitle: TextView = itemView.findViewById(R.id.textView)
         private val textViewNumber: TextView = itemView.findViewById(R.id.textViewNumber)
@@ -31,10 +34,27 @@ class FivePAdapter(list_project:ArrayList<String>,
             textViewNumber.text = numberText
 
             // Изменение картинки, в зависимости от статуса
-            // 185 167 126 120 82 61 54 42 24
-            if (status) {imageViewCompat.setImageResource(R.mipmap.pencil_big)}
-            else {imageViewCompat.setImageResource(R.mipmap.pencil_small)}
+            // 185, 167, 126, 120, 82, 61, 54, 42, 24 - номера изображений
+            if (status) {imageViewCompat.setImageResource(R.drawable.vector_ok)}
+            else {imageViewCompat.setImageResource(R.drawable.vector_not_ok)}
         }
+
+        init {
+            itemView.setOnClickListener(this)
+        }
+
+        override fun onClick(v: View?) {
+            val position = adapterPosition
+            if (position != RecyclerView.NO_POSITION) {
+                listener.onItemClick(position)
+            }
+        }
+
+
+    }
+
+    interface OnItemClickListener {
+        fun onItemClick(position: Int)
     }
 
     // Шаблон
@@ -53,9 +73,7 @@ class FivePAdapter(list_project:ArrayList<String>,
     }
 
     // Кол-во элементов
-    override fun getItemCount(): Int {
-        return arrayProject.size
-    }
+    override fun getItemCount(): Int = arrayProject.size
 
     fun updateAdapter(arrayProjectAdd: ArrayList<String>,
                       arrayNumberAdd:  ArrayList<Int>,
