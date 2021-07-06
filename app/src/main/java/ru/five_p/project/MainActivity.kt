@@ -12,11 +12,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), FivePAdapter.OnItemClickListener {
 
-    private val myAdapter = FivePAdapter(ArrayList(), ArrayList(), ArrayList(), this)
-    private var myProjectList = arrayListOf<String>()
-    private var myNumberList = arrayListOf<Int>()
-    private var myStatusList = arrayListOf<Boolean>()
-    private var count = 0
+    private val myAdapter = FivePAdapter(this)
+    private var dataProject = arrayListOf<ProjectStructure>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,9 +22,12 @@ class MainActivity : AppCompatActivity(), FivePAdapter.OnItemClickListener {
         Log.d("PPPPP", "setMainAct")
     }
 
+    private fun fillAdapter() {
+        myAdapter.update(dataProject)
+    }
+
     override fun onResume() {
         super.onResume()
-        fillAdapter()
         Log.d("PPPPP","onResume")
     }
 
@@ -35,11 +35,6 @@ class MainActivity : AppCompatActivity(), FivePAdapter.OnItemClickListener {
         rcView.layoutManager = LinearLayoutManager(this)
         rcView.adapter = myAdapter
 
-    }
-
-    private fun fillAdapter() {
-        myAdapter.updateAdapter(myProjectList, myNumberList, myStatusList)
-        Log.d("PPPPP", "Update Adapter")
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -63,14 +58,13 @@ class MainActivity : AppCompatActivity(), FivePAdapter.OnItemClickListener {
             // Текст проекта
             var text = setDialog.editText.text.toString()
             if (text.isBlank()) text = "Мой новый проект"
-            myProjectList.add(text)
 
-            // Порядковый номер проета
-            myNumberList.add(count)
-            count++
+            val count = dataProject.size
 
-            // Статус проекта
-            myStatusList.add(true)
+            val s = count % 2 == 0
+            val data = ProjectStructure(text, count, s)
+
+            dataProject.add(data)
 
             fillAdapter()
         }
@@ -83,5 +77,29 @@ class MainActivity : AppCompatActivity(), FivePAdapter.OnItemClickListener {
         intent.putExtra("positionOfProject", position)
 
         startActivity(intent)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.run {
+            putParcelableArrayList("key", dataProject)
+        }
+        Log.d("PPPPP", "Data is: $dataProject")
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+        dataProject = savedInstanceState.getParcelableArrayList("key")!!
+        fillAdapter()
+        Log.d("PPPPP", "Restored is: $dataProject")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d("PPPPP", "onDestroy")
+
+        if (isFinishing) {
+            Log.d("PPPPP", "isFinishing")
+        }
     }
 }

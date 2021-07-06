@@ -9,15 +9,10 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import kotlin.collections.ArrayList
 
-class FivePAdapter(list_project:ArrayList<String>,
-                   list_number:ArrayList<Int>,
-                   list_status:ArrayList<Boolean>,
-                   private val listener: OnItemClickListener)
+class FivePAdapter(private val listener: OnItemClickListener)
     : RecyclerView.Adapter<FivePAdapter.FivePHolder>() {
 
-    private var arrayProject = list_project
-    private var arrayNumber = list_number
-    private var arrayStatus = list_status
+    private val dataList = ArrayList<ProjectStructure>()
 
     inner class FivePHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
         View.OnClickListener {
@@ -26,16 +21,14 @@ class FivePAdapter(list_project:ArrayList<String>,
         private val textViewNumber: TextView = itemView.findViewById(R.id.textViewNumber)
         private val imageViewCompat: ImageView = itemView.findViewById(R.id.imageViewStatus)
 
-        fun setData(title:String, number:Int, status:Boolean){
-            textViewTitle.text = title
+        // Заполнение по шаблону
+        fun bind(structure: ProjectStructure) {
+            textViewTitle.text = structure.name
 
-            // Номер со знаком "#", иначе не красиво
-            val numberText = "#$number"
+            val numberText = "#${structure.number}"
             textViewNumber.text = numberText
 
-            // Изменение картинки, в зависимости от статуса
-            // 185, 167, 126, 120, 82, 61, 54, 42, 24 - номера изображений
-            if (status) {imageViewCompat.setImageResource(R.drawable.vector_ok)}
+            if (structure.status) {imageViewCompat.setImageResource(R.drawable.vector_ok)}
             else {imageViewCompat.setImageResource(R.drawable.vector_not_ok)}
         }
 
@@ -66,27 +59,16 @@ class FivePAdapter(list_project:ArrayList<String>,
 
     // Подключение данных из массива к шаблону
     override fun onBindViewHolder(holder: FivePHolder, position: Int) {
-        holder.setData(
-            arrayProject[position],
-            arrayNumber[position],
-            arrayStatus[position])
+        holder.bind(dataList[position])
     }
 
     // Кол-во элементов
-    override fun getItemCount(): Int = arrayProject.size
+    override fun getItemCount(): Int = dataList.size
 
-    fun updateAdapter(arrayProjectAdd: ArrayList<String>,
-                      arrayNumberAdd:  ArrayList<Int>,
-                      arrayStatusAdd:  ArrayList<Boolean>) {
-
-        arrayProject.clear()
-        arrayNumber.clear()
-        arrayStatus.clear()
-
-        arrayProject.addAll(arrayProjectAdd)
-        arrayNumber.addAll(arrayNumberAdd)
-        arrayStatus.addAll(arrayStatusAdd)
-
+    // Обновление ("пересоздание") массива данных
+    fun update(data: ArrayList<ProjectStructure>) {
+        dataList.clear()
+        dataList.addAll(data)
         notifyDataSetChanged()
     }
 }
