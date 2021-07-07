@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
@@ -19,11 +20,13 @@ class MainActivity : AppCompatActivity(), FivePAdapter.OnItemClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setAdapter()
+        emptyRV()
         Log.d("PPPPP", "setMainAct")
     }
 
     private fun fillAdapter() {
         myAdapter.update(dataProject)
+        emptyRV()
     }
 
     override fun onResume() {
@@ -47,7 +50,9 @@ class MainActivity : AppCompatActivity(), FivePAdapter.OnItemClickListener {
             createNewProject()
             true
         } R.id.action_bar_help -> {
-            Toast.makeText(this, "Кнопка помощи $item", Toast.LENGTH_SHORT).show()
+            dataProject.clear()
+            fillAdapter()
+            Toast.makeText(this, "Кнопка помощи", Toast.LENGTH_SHORT).show()
             true
         } else -> super.onOptionsItemSelected(item)
     }
@@ -69,6 +74,20 @@ class MainActivity : AppCompatActivity(), FivePAdapter.OnItemClickListener {
             fillAdapter()
         }
         setDialog.show(supportFragmentManager, "newProject")
+    }
+
+    private fun emptyRV() {
+        val recyclerView = rcView
+        val emptyView = empty_view
+
+        if (dataProject.isEmpty()) {
+            recyclerView.visibility = View.GONE
+            emptyView.visibility = View.VISIBLE
+        } else {
+            recyclerView.visibility = View.VISIBLE
+            emptyView.visibility = View.GONE
+        }
+        Log.d("PPPPP", "Visible gone is: ${View.GONE}")
     }
 
     override fun onItemClick(position: Int) {

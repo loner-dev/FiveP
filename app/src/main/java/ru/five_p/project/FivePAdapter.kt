@@ -42,8 +42,6 @@ class FivePAdapter(private val listener: OnItemClickListener)
                 listener.onItemClick(position)
             }
         }
-
-
     }
 
     interface OnItemClickListener {

@@ -15,4 +15,5 @@
     <string name="save_name_str">Изменить имя проекта</string>
     <string name="save_purpose_str">Изменить цель проекта</string>
     <string name="delete_project_str">Удалить проект</string>
+    <string name="no_data_available">Нет данных!</string>
 </resources>
