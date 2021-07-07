@@ -20,7 +20,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:itemCount="5"
-        tools:listitem="@layout/list_custom" />
+        tools:listitem="@layout/list_custom"
+        tools:visibility="gone"/>
 
     <TextView
         android:id="@+id/empty_view"
@@ -28,6 +29,7 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:visibility="gone"
-        android:text="@string/no_data_available"/>
+        android:text="@string/no_data_available"
+        tools:visibility="visible"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
