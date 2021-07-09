@@ -24,6 +24,7 @@ class FivePAdapter(private val listener: OnItemClickListener)
         // Заполнение по шаблону
         fun bind(structure: ProjectStructure) {
             textViewTitle.text = structure.name
+            textViewTitle.isSelected = true
 
             val numberText = "#${structure.number}"
             textViewNumber.text = numberText
